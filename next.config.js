@@ -1,6 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-}
+  output: "export",
 
-module.exports = nextConfig
+  basePath: "/coloranalyze.me",
+  assetPrefix: "/coloranalyze.me/",
+
+  images: {
+    unoptimized: true,
+  },
+};
+
+module.exports = nextConfig;
