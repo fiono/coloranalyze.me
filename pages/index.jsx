@@ -1,36 +1,33 @@
-import { useState } from "react";
+import { Model } from "survey-core";
+import { Survey } from "survey-react-ui";
+import "survey-core/defaultV2.min.css";
 
 function Header({ title }) {
   return <h1>{title} :)</h1>;
 }
 
 export default function HomePage() {
-  const [likes, setLikes] = useState(0);
-  const colors = [
-    "red",
-    "orange",
-    "yellow",
-    "green",
-    "blue",
-    "indigo",
-    "violet",
-  ];
+  const surveyJson = {
+    elements: [
+      {
+        name: "FirstName",
+        title: "Enter your first name:",
+        type: "text",
+      },
+      {
+        name: "LastName",
+        title: "Enter your last name:",
+        type: "text",
+      },
+    ],
+  };
 
-  function handleClick() {
-    setLikes(likes + 1);
-  }
+  const survey = new Model(surveyJson);
 
   return (
     <div>
       <Header title="colors 🌈" />
-
-      <ul>
-        {colors.map((c) => (
-          <li key="{c}">{c}</li>
-        ))}
-      </ul>
-
-      <button onClick={handleClick}>Like ({likes})</button>
+      <Survey model={survey} />;
     </div>
   );
 }
