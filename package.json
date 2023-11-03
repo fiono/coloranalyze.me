@@ -12,7 +12,9 @@
   "dependencies": {
     "next": "14.0.1",
     "react": "^18",
+    "react-color": "^2.19.3",
     "react-dom": "^18",
+    "react-nice-avatar": "^1.4.1",
     "survey-react-ui": "^1.9.114"
   },
   "devDependencies": {
