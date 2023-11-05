@@ -3,6 +3,9 @@ import { Survey } from "survey-react-ui";
 import { PlainLight } from "survey-core/themes/plain-light";
 import Avatar, { genConfig } from "react-nice-avatar";
 import { CirclePicker } from "react-color";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "survey-core/defaultV2.min.css";
@@ -61,17 +64,23 @@ export default function HomePage() {
   survey.applyTheme(PlainLight);
 
   return (
-    <div>
+    <Container>
       <Header title="Seasonal Color Analysis 🌈" />
-      <div>
-        <Avatar
-          style={{ width: "8rem", height: "8rem" }}
-          {...avatarConfig}
-          shape="rounded"
-        />
-        <CirclePicker colors={skinColors} />
-      </div>
-      <Survey model={survey} />;
-    </div>
+      <Row>
+        <Col>
+          <Avatar
+            style={{ width: "8rem", height: "8rem" }}
+            {...avatarConfig}
+            shape="rounded"
+          />
+        </Col>
+        <Col>
+          <CirclePicker colors={skinColors} />
+        </Col>
+      </Row>
+      <Row>
+        <Survey model={survey} />
+      </Row>
+    </Container>
   );
 }
