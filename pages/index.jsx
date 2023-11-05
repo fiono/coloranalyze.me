@@ -4,6 +4,7 @@ import { PlainLight } from "survey-core/themes/plain-light";
 import Avatar, { genConfig } from "react-nice-avatar";
 import { CirclePicker } from "react-color";
 
+import "bootstrap/dist/css/bootstrap.css";
 import "survey-core/defaultV2.min.css";
 
 function Header({ title }) {
