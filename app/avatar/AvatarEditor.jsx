@@ -12,6 +12,7 @@ export default function AvatarEditor() {
     mouthStyle: "smile",
     shirtStyle: "short",
     glassesStyle: "none",
+    hatStyle: "none",
     hairStyle: "womanLong",
     eyeBrowStyle: "upWoman",
     shirtColor: "#9287FF",
@@ -21,16 +22,16 @@ export default function AvatarEditor() {
   const skinColors = ["#ffdbac", "#f1c27d", "#e0ac69", "#c68642", "#8d5524"];
 
   return (
-    <main className="">
-      <Row>
-        <Col>
+    <main>
+      <Row className="justify-content-center">
+        <Col xs="auto">
           <Avatar
             style={{ width: "8rem", height: "8rem" }}
             {...avatarConfig}
             shape="rounded"
           />
         </Col>
-        <Col>
+        <Col xs="auto">
           <CirclePicker colors={skinColors} />
         </Col>
       </Row>

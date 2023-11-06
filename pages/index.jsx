@@ -19,12 +19,14 @@ export default function HomePage() {
   return (
     <main className={font.className}>
       <Container>
-        <h1>{title}</h1>
+        <Row className="text-center">
+          <h1>{title}</h1>
+        </Row>
 
         <AvatarEditor />
 
         <Row>
-          <ColorSurvey />
+          <ColorSurvey fontName={font.className} />
         </Row>
       </Container>
     </main>
