@@ -80,6 +80,11 @@ export class SurveyQuestionColorComparison extends SurveyQuestionElementBase {
     return this.question.value;
   }
 
+  handleColorChoice(question, index) {
+    question.value = index;
+    return false;
+  }
+
   renderElement() {
     return (
       <Container>
@@ -87,10 +92,12 @@ export class SurveyQuestionColorComparison extends SurveyQuestionElementBase {
           <SurveyQuestionColorComparisonItem
             index={0}
             question={this.question}
+            handleColorChoice={this.handleColorChoice}
           />
           <SurveyQuestionColorComparisonItem
             index={1}
             question={this.question}
+            handleColorChoice={this.handleColorChoice}
           />
         </Row>
         <p>Select the color that suits your features the best.</p>
@@ -111,15 +118,15 @@ function ColorBar({ color }) {
   return <div style={{ backgroundColor: color }} className="color-bar"></div>;
 }
 
-function SurveyQuestionColorComparisonItem({ index, question }) {
-  function handleClick() {
-    question.value = index;
-  }
-
+function SurveyQuestionColorComparisonItem({
+  index,
+  question,
+  handleColorChoice,
+}) {
   return (
     <Col>
       <input id={question.getQuestionId} className="sv-hidden" />
-      <a href="#" onClick={handleClick}>
+      <a href="#" onClick={() => handleColorChoice(question, index)}>
         <Image src={question.imageContent} fluid />
         <ColorBar color={index == 0 ? question.colorA : question.colorB} />
       </a>

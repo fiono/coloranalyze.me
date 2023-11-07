@@ -2,7 +2,6 @@ export const surveyMetadata = {
   pages: [
     {
       name: "page1",
-      title: "Start by uploading an image",
       elements: [
         {
           type: "file",

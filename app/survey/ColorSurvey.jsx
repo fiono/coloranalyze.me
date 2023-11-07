@@ -26,10 +26,11 @@ export default function ColorSurvey({ fontName }) {
     question: { title: fontName },
   };
 
-  survey.onValueChanged.add((survey, { name, question, value }) => {
-    if (name == "image_q") {
-      setImageContents(value[0].content);
-      console.log(`Image contents is now ${imageContents}`);
+  survey.onUploadFiles.add((_, options) => {});
+
+  survey.onUploadFiles.add((survey, { name, question, files }) => {
+    if (name == "image_q_") {
+      setImageContents(files[0].content);
 
       const question1 = survey.getAllQuestions()[1];
 
