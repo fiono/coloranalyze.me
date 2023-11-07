@@ -2,15 +2,28 @@ import { Question } from "survey-core";
 import { Serializer } from "survey-core";
 import { SurveyQuestionElementBase } from "survey-react-ui";
 
-export const CUSTOM_TYPE = "color-comparison";
+import Image from "react-bootstrap/Image";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+
+import { createElement } from "react";
+import { ReactQuestionFactory } from "survey-react-ui";
+
+import { ReactSurveyElement } from "survey-react-ui";
+
+export const COLOR_COMPARISON_TYPE = "color-comparison";
 
 export class ColorComparisonQuestion extends Question {
   getType() {
-    return CUSTOM_TYPE;
+    return COLOR_COMPARISON_TYPE;
   }
 
   get imageContent() {
-    return this.getPropertyValue("imageContent"); //or "https://cdn-icons-png.flaticon.com/512/5726/5726470.png";
+    return (
+      this.getPropertyValue("imageContent") ||
+      "https://cdn-icons-png.flaticon.com/512/5726/5726470.png"
+    );
   }
 
   set imageContent(val) {
@@ -36,12 +49,15 @@ export class ColorComparisonQuestion extends Question {
 
 // Tell the serializer how to serialize the question data
 Serializer.addClass(
-  CUSTOM_TYPE,
+  COLOR_COMPARISON_TYPE,
   [
     {
-      name: "colorComparisonType",
+      name: "colorA",
       category: "general",
-      visibleIndex: 2, // Place after the Name and Title
+    },
+    {
+      name: "colorB",
+      category: "general",
     },
   ],
   function () {
@@ -54,9 +70,6 @@ Serializer.addClass(
 export class SurveyQuestionColorComparison extends SurveyQuestionElementBase {
   constructor(props) {
     super(props);
-    this.state = {
-      value: this.question.value,
-    };
   }
 
   get question() {
@@ -67,17 +80,56 @@ export class SurveyQuestionColorComparison extends SurveyQuestionElementBase {
     return this.question.value;
   }
 
-  get type() {
-    return this.question.colorComparisonType;
+  handleColorChoice(question, index) {
+    question.value = index;
+    return false;
   }
 
   renderElement() {
     return (
-      <div>
-        <img src={this.question.imageContent}></img>
-        <img src={this.question.imageContent}></img>
-        <p>hello!! 🌈</p>
-      </div>
+      <Container>
+        <Row>
+          <SurveyQuestionColorComparisonItem
+            index={0}
+            question={this.question}
+            handleColorChoice={this.handleColorChoice}
+          />
+          <SurveyQuestionColorComparisonItem
+            index={1}
+            question={this.question}
+            handleColorChoice={this.handleColorChoice}
+          />
+        </Row>
+        <p>Select the color that suits your features the best.</p>
+      </Container>
     );
   }
+}
+
+// Register component
+ReactQuestionFactory.Instance.registerQuestion(
+  COLOR_COMPARISON_TYPE,
+  (props) => {
+    return createElement(SurveyQuestionColorComparison, props);
+  }
+);
+
+function ColorBar({ color }) {
+  return <div style={{ backgroundColor: color }} className="color-bar"></div>;
+}
+
+function SurveyQuestionColorComparisonItem({
+  index,
+  question,
+  handleColorChoice,
+}) {
+  return (
+    <Col>
+      <input id={question.getQuestionId} className="sv-hidden" />
+      <a href="#" onClick={() => handleColorChoice(question, index)}>
+        <Image src={question.imageContent} fluid />
+        <ColorBar color={index == 0 ? question.colorA : question.colorB} />
+      </a>
+    </Col>
+  );
 }
