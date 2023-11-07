@@ -14,7 +14,7 @@ const font = Young_Serif({
 });
 
 export default function HomePage() {
-  const title = "Seasonal Color Analysis 🌈";
+  const title = "💐🍉 Seasonal Color Analysis 🍁❄️";
 
   return (
     <main className={font.className}>
@@ -22,8 +22,6 @@ export default function HomePage() {
         <Row className="text-center">
           <h1>{title}</h1>
         </Row>
-
-        <AvatarEditor />
 
         <Row>
           <ColorSurvey fontName={font.className} />

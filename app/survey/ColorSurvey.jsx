@@ -1,16 +1,15 @@
 import { Model } from "survey-core";
 import { PlainLight } from "survey-core/themes/plain-light";
 import { Survey } from "survey-react-ui";
-import { surveyMetadata } from "./survey_metadata.jsx";
+import { surveyMetadata } from "./survey_metadata.js";
 import { useState } from "react";
-
 import { createElement } from "react";
 import { ElementFactory } from "survey-core";
 import { ReactQuestionFactory } from "survey-react-ui";
 import {
   ColorComparisonQuestion,
   SurveyQuestionColorComparison,
-  CUSTOM_TYPE,
+  COLOR_COMPARISON_TYPE,
 } from "./ColorComparisonQuestion.jsx";
 
 import "./survey.css";
@@ -19,14 +18,17 @@ export default function ColorSurvey({ fontName }) {
   const [imageContents, setImageContents] = useState("");
 
   // Register question type
-  ElementFactory.Instance.registerElement(CUSTOM_TYPE, (name) => {
+  ElementFactory.Instance.registerElement(COLOR_COMPARISON_TYPE, (name) => {
     return new ColorComparisonQuestion(name);
   });
 
   // Register component
-  ReactQuestionFactory.Instance.registerQuestion(CUSTOM_TYPE, (props) => {
-    return createElement(SurveyQuestionColorComparison, props);
-  });
+  ReactQuestionFactory.Instance.registerQuestion(
+    COLOR_COMPARISON_TYPE,
+    (props) => {
+      return createElement(SurveyQuestionColorComparison, props);
+    }
+  );
 
   const survey = new Model(surveyMetadata);
   survey.applyTheme(PlainLight);

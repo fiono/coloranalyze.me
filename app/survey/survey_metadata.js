@@ -27,6 +27,12 @@ export const surveyMetadata = {
           title: "This or that",
         },
       ],
+      imageFit: "cover",
     },
   ],
+  showTitle: false,
+  goNextPageAutomatic: true,
+  firstPageIsStarted: true,
+  widthMode: "responsive",
+  fitToContainer: true,
 };

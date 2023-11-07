@@ -2,15 +2,23 @@ import { Question } from "survey-core";
 import { Serializer } from "survey-core";
 import { SurveyQuestionElementBase } from "survey-react-ui";
 
-export const CUSTOM_TYPE = "color-comparison";
+import Image from "react-bootstrap/Image";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+
+export const COLOR_COMPARISON_TYPE = "color-comparison";
 
 export class ColorComparisonQuestion extends Question {
   getType() {
-    return CUSTOM_TYPE;
+    return COLOR_COMPARISON_TYPE;
   }
 
   get imageContent() {
-    return this.getPropertyValue("imageContent"); //or "https://cdn-icons-png.flaticon.com/512/5726/5726470.png";
+    return (
+      this.getPropertyValue("imageContent") ||
+      "https://cdn-icons-png.flaticon.com/512/5726/5726470.png"
+    );
   }
 
   set imageContent(val) {
@@ -36,7 +44,7 @@ export class ColorComparisonQuestion extends Question {
 
 // Tell the serializer how to serialize the question data
 Serializer.addClass(
-  CUSTOM_TYPE,
+  COLOR_COMPARISON_TYPE,
   [
     {
       name: "colorComparisonType",
@@ -73,11 +81,17 @@ export class SurveyQuestionColorComparison extends SurveyQuestionElementBase {
 
   renderElement() {
     return (
-      <div>
-        <img src={this.question.imageContent}></img>
-        <img src={this.question.imageContent}></img>
-        <p>hello!! 🌈</p>
-      </div>
+      <Container>
+        <Row>
+          <Col>
+            <Image src={this.question.imageContent} fluid />
+          </Col>
+          <Col>
+            <Image src={this.question.imageContent} xs="auto" fluid />
+          </Col>
+        </Row>
+        <p>Select the color that suits your features the best.</p>
+      </Container>
     );
   }
 }
