@@ -7,6 +7,11 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
+import { createElement } from "react";
+import { ReactQuestionFactory } from "survey-react-ui";
+
+import { ReactSurveyElement } from "survey-react-ui";
+
 export const COLOR_COMPARISON_TYPE = "color-comparison";
 
 export class ColorComparisonQuestion extends Question {
@@ -47,9 +52,12 @@ Serializer.addClass(
   COLOR_COMPARISON_TYPE,
   [
     {
-      name: "colorComparisonType",
+      name: "colorA",
       category: "general",
-      visibleIndex: 2, // Place after the Name and Title
+    },
+    {
+      name: "colorB",
+      category: "general",
     },
   ],
   function () {
@@ -62,9 +70,6 @@ Serializer.addClass(
 export class SurveyQuestionColorComparison extends SurveyQuestionElementBase {
   constructor(props) {
     super(props);
-    this.state = {
-      value: this.question.value,
-    };
   }
 
   get question() {
@@ -75,23 +80,49 @@ export class SurveyQuestionColorComparison extends SurveyQuestionElementBase {
     return this.question.value;
   }
 
-  get type() {
-    return this.question.colorComparisonType;
-  }
-
   renderElement() {
     return (
       <Container>
         <Row>
-          <Col>
-            <Image src={this.question.imageContent} fluid />
-          </Col>
-          <Col>
-            <Image src={this.question.imageContent} xs="auto" fluid />
-          </Col>
+          <SurveyQuestionColorComparisonItem
+            index={0}
+            question={this.question}
+          />
+          <SurveyQuestionColorComparisonItem
+            index={1}
+            question={this.question}
+          />
         </Row>
         <p>Select the color that suits your features the best.</p>
       </Container>
     );
   }
+}
+
+// Register component
+ReactQuestionFactory.Instance.registerQuestion(
+  COLOR_COMPARISON_TYPE,
+  (props) => {
+    return createElement(SurveyQuestionColorComparison, props);
+  }
+);
+
+function ColorBar({ color }) {
+  return <div style={{ backgroundColor: color }} className="color-bar"></div>;
+}
+
+function SurveyQuestionColorComparisonItem({ index, question }) {
+  function handleClick() {
+    question.value = index;
+  }
+
+  return (
+    <Col>
+      <input id={question.getQuestionId} className="sv-hidden" />
+      <a href="#" onClick={handleClick}>
+        <Image src={question.imageContent} fluid />
+        <ColorBar color={index == 0 ? question.colorA : question.colorB} />
+      </a>
+    </Col>
+  );
 }
