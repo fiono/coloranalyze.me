@@ -1,0 +1,28 @@
+:root {
+  font-family: "Young-Serif", Inter, serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+}
+
+a {
+  color: #aa5cea;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #aa5cea;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  place-items: center;
+  height: 100vh;
+}
