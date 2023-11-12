@@ -1,19 +1,20 @@
 import * as React from "react";
 
 import ImageUploading from "react-images-uploading";
+import { ImageListType } from "react-images-uploading";
 
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
-function ImagePreview({ imageLocation }) {
+function ImagePreview({ imageLocation }: { imageLocation: string }) {
   return <img src={imageLocation} alt="" height="250" />;
 }
 
-export default function ImageUpload({ palette }) {
-  const [images, setImages] = React.useState([]);
+export default function ImageUpload({}) {
+  const [images, setImages] = React.useState<ImageListType>([]);
 
-  const onChange = (imageList) => {
+  const onChange = (imageList: ImageListType) => {
     console.log(imageList);
     setImages(imageList);
   };
@@ -38,7 +39,7 @@ export default function ImageUpload({ palette }) {
               p: 5,
               w: 100,
               h: 40,
-              color: palette.primary.main,
+              color: "primary.main",
               border: 2,
               borderRadius: 4,
             }}

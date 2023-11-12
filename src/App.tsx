@@ -32,9 +32,9 @@ function App() {
 
         <Container maxWidth="lg">
           <Typography variant="h2" align="center">
-            🌈 Seasonal Color Analysis
+            🌈 Seasonal Color Analysis 🌈
           </Typography>
-          <ImageUpload palette={palette} />
+          <ImageUpload />
         </Container>
       </ThemeProvider>
     </React.Fragment>
