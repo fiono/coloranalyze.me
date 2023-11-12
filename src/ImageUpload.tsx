@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import ImageUploading from "react-images-uploading";
 import { ImageListType } from "react-images-uploading";
 
@@ -11,16 +9,16 @@ function ImagePreview({ imageLocation }: { imageLocation: string }) {
   return <img src={imageLocation} alt="" height="250" />;
 }
 
-export default function ImageUpload({}) {
-  const [images, setImages] = React.useState<ImageListType>([]);
-
-  const onChange = (imageList: ImageListType) => {
-    console.log(imageList);
-    setImages(imageList);
-  };
-
+export default function ImageUpload({
+  images,
+  onChange,
+}: {
+  images: ImageListType;
+  onChange: (imageList: ImageListType) => void;
+}) {
   const image =
     images.length > 0 ? images[0]["data_url"] : "/image_placeholder.png";
+
   const imageElement = <ImagePreview imageLocation={image} />;
 
   return (

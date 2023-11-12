@@ -6,9 +6,11 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import ImageUpload from "./ImageUpload";
 
+import { ImageListType } from "react-images-uploading";
+
 import "@fontsource/young-serif";
 
-function App() {
+function getTheme() {
   const palette = {
     primary: {
       main: "#E3D026",
@@ -18,12 +20,23 @@ function App() {
     },
   };
 
-  const theme = createTheme({
+  return createTheme({
     typography: {
       fontFamily: ['"Young Serif"', "serif"].join(","),
     },
     palette: palette,
   });
+}
+
+function App() {
+  const [images, setImages] = React.useState<ImageListType>([]);
+
+  const theme = getTheme();
+
+  const onChange = (imageList: ImageListType) => {
+    console.log(imageList);
+    setImages(imageList);
+  };
 
   return (
     <React.Fragment>
@@ -34,7 +47,7 @@ function App() {
           <Typography variant="h2" align="center">
             🌈 Seasonal Color Analysis 🌈
           </Typography>
-          <ImageUpload />
+          <ImageUpload images={images} onChange={onChange} />
         </Container>
       </ThemeProvider>
     </React.Fragment>
