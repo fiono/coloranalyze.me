@@ -59,11 +59,7 @@ function App() {
             />
           )}
           {hasImage && (
-            <ImageColorComparison
-              imageLocation={images[0]["data_url"]}
-              colorA={"orange"}
-              colorB={"red"}
-            />
+            <ImageColorComparison imageLocation={images[0]["data_url"]} />
           )}
         </Container>
       </ThemeProvider>
