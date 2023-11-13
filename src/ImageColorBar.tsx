@@ -11,7 +11,7 @@ export default function ImageColorBar({
   return (
     <Box display="flex" justifyContent="center">
       <Stack>
-        <img src={imageLocation} width="150" />
+        <img src={imageLocation} width="200" />
         <Box sx={{ backgroundColor: color, height: 40, width: "inherit" }} />
       </Stack>
     </Box>

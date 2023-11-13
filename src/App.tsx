@@ -4,12 +4,11 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
 
 import { ImageListType } from "react-images-uploading";
 
 import ImageUpload from "./ImageUpload";
-import ImageColorBar from "./ImageColorBar";
+import ImageColorComparison from "./ImageColorComparison";
 
 import "@fontsource/young-serif";
 
@@ -33,23 +32,17 @@ function getTheme() {
 
 function App() {
   const [images, setImages] = React.useState<ImageListType>([]);
+
   const theme = getTheme();
 
-  const colors = ["red", "orange", "yellow", "green", "blue", "purple"];
   let imageColors = null;
   if (images.length > 0) {
-    const image = images[0];
-    const imageColorBars = colors.map((color, idx) => {
-      return (
-        <Grid item justifyContent="center" key={idx} xs={1}>
-          <ImageColorBar imageLocation={image["data_url"]} color={color} />
-        </Grid>
-      );
-    });
     imageColors = (
-      <Grid container justifyContent="center" columns={3} spacing={2}>
-        {imageColorBars}
-      </Grid>
+      <ImageColorComparison
+        imageLocation={images[0]["data_url"]}
+        colorA={"orange"}
+        colorB={"red"}
+      />
     );
   }
 
