@@ -4,10 +4,8 @@ import { ImageListType } from "react-images-uploading";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-
-function ImagePreview({ imageLocation }: { imageLocation: string }) {
-  return <img src={imageLocation} alt="" height="250" />;
-}
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
 export default function ImageUpload({
   images,
@@ -19,8 +17,6 @@ export default function ImageUpload({
   const image =
     images.length > 0 ? images[0]["data_url"] : "/image_placeholder.png";
 
-  const imageElement = <ImagePreview imageLocation={image} />;
-
   return (
     <ImageUploading
       value={images}
@@ -30,23 +26,35 @@ export default function ImageUpload({
     >
       {({ isDragging, dragProps, onImageUpload }) => (
         <Container {...dragProps}>
-          <Box
-            textAlign="center"
+          <Stack
             sx={{
-              m: 10,
-              p: 5,
-              w: 100,
-              h: 40,
+              padding: 2,
+              margin: 2,
+              height: { xs: 300, md: 400 },
               color: "primary.main",
               border: 2,
               borderRadius: 4,
+              textAlign: "center",
+              alignItems: "center",
             }}
           >
+            <Typography>
+              Click the button below to upload an image or drag your file into
+              this box.
+            </Typography>
+            <Box sx={{ m: 1 }} />
             <Button variant="contained" onClick={onImageUpload}>
               {isDragging ? "Drag Image" : "Upload Image"}
             </Button>
-            <Box sx={{ m: 2 }}>{imageElement}</Box>
-          </Box>
+            <Box sx={{ m: 1 }} />
+            <Box
+              component="img"
+              src={image}
+              alt="You!"
+              display="block"
+              sx={{ height: { xs: 130, md: 270 } }}
+            />
+          </Stack>
         </Container>
       )}
     </ImageUploading>

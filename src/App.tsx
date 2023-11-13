@@ -25,6 +25,12 @@ function getTheme() {
   return createTheme({
     typography: {
       fontFamily: ['"Young Serif"', "serif"].join(","),
+      h3: {
+        fontSize: "1.2rem",
+        "@media (min-width:800px)": {
+          fontSize: "3rem",
+        },
+      },
     },
     palette: palette,
   });
@@ -50,8 +56,8 @@ function App() {
     <React.Fragment>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Container maxWidth="lg">
-          <Typography variant="h2" align="center">
+        <Container maxWidth="lg" sx={{ p: 1 }}>
+          <Typography variant="h3" align="center">
             🌈 Seasonal Color Analysis 🌈
           </Typography>
           <ImageUpload
