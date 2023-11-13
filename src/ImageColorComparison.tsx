@@ -34,7 +34,7 @@ export default function ImageColorComparison({
   colorA: string;
   colorB: string;
 }) {
-  const [colorChoice, setColorChoice] = React.useState<string>("");
+  const [_, setColorChoice] = React.useState<string>("");
 
   const handleChooseColor = function (color: string): void {
     setColorChoice(color);
