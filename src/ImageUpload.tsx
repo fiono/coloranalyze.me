@@ -38,11 +38,8 @@ export default function ImageUpload({
               alignItems: "center",
             }}
           >
-            <Typography>
-              Click the button below to upload an image or drag your file into
-              this box.
-            </Typography>
-            <Box sx={{ m: 1 }} />
+            <Typography>Drag and drop your image here</Typography>
+            <Typography>or</Typography>
             <Button variant="contained" onClick={onImageUpload}>
               {isDragging ? "Drag Image" : "Upload Image"}
             </Button>

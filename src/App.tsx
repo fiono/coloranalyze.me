@@ -38,19 +38,9 @@ function getTheme() {
 
 function App() {
   const [images, setImages] = React.useState<ImageListType>([]);
+  const hasImage = images.length > 0;
 
   const theme = getTheme();
-
-  let imageColors = null;
-  if (images.length > 0) {
-    imageColors = (
-      <ImageColorComparison
-        imageLocation={images[0]["data_url"]}
-        colorA={"orange"}
-        colorB={"red"}
-      />
-    );
-  }
 
   return (
     <React.Fragment>
@@ -60,13 +50,21 @@ function App() {
           <Typography variant="h3" align="center">
             🌈 Seasonal Color Analysis 🌈
           </Typography>
-          <ImageUpload
-            images={images}
-            onChange={(imageList: ImageListType) => {
-              setImages(imageList);
-            }}
-          />
-          {imageColors}
+          {hasImage || (
+            <ImageUpload
+              images={images}
+              onChange={(imageList: ImageListType) => {
+                setImages(imageList);
+              }}
+            />
+          )}
+          {hasImage && (
+            <ImageColorComparison
+              imageLocation={images[0]["data_url"]}
+              colorA={"orange"}
+              colorB={"red"}
+            />
+          )}
         </Container>
       </ThemeProvider>
     </React.Fragment>
