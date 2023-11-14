@@ -9,6 +9,7 @@ import { ImageListType } from "react-images-uploading";
 
 import ImageUpload from "./ImageUpload";
 import ImageColorComparison from "./ImageColorComparison";
+import { MetaSeason } from "./ColorSeason";
 
 import "@fontsource/young-serif";
 
@@ -59,7 +60,10 @@ function App() {
             />
           )}
           {hasImage && (
-            <ImageColorComparison imageLocation={images[0]["data_url"]} />
+            <ImageColorComparison
+              imageLocation={images[0]["data_url"]}
+              metaSeason={MetaSeason.Spring}
+            />
           )}
         </Container>
       </ThemeProvider>

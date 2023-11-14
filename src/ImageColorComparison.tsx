@@ -6,6 +6,8 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
+import { ColorCategory, MetaSeason, getVariants, rainbow } from "./ColorSeason";
+
 function ImageColorItem({
   imageLocation,
   color,
@@ -25,7 +27,7 @@ function ImageColorItem({
               src={imageLocation}
               sx={{ width: "100%", maxHeight: { xs: 300, md: 500 } }}
             />
-            <Box sx={{ backgroundColor: color, height: 40, width: "100%" }} />
+            <Box sx={{ backgroundColor: color, height: 70, width: "100%" }} />
           </Stack>
         </Box>
       </ButtonBase>
@@ -69,15 +71,31 @@ function ImageColorGrid({
 
 export default function ImageColorComparison({
   imageLocation,
+  metaSeason,
 }: {
   imageLocation: string;
+  metaSeason: MetaSeason;
 }) {
-  const [_, setColorChoice] = React.useState<string>("");
+  const [colorChoices, setColorChoices] = React.useState<string[]>("");
+  const [colorCategoryList] = React.useState<ColorCategory[]>(rainbow);
+  const [colorCategory, setColorCategory] = React.useState<ColorCategory>(
+    ColorCategory.Reds
+  );
+
+  const variants = getVariants(metaSeason);
 
   const handleChooseColor = function (color: string): void {
-    setColorChoice(color);
-    console.log("hello :)", color);
+    setColorChoices(colorChoices.concat(color));
+    if (colorCategoryList.length > 0) {
+      setColorCategory(colorCategoryList.shift() ?? ColorCategory.Neutrals);
+    } else {
+      console.log(colorChoices);
+    }
   };
+
+  const colorA: string = variants[0].getColors()[colorCategory][0];
+  const colorB: string = variants[1].getColors()[colorCategory][0];
+  const colorC: string = variants[2].getColors()[colorCategory][0];
 
   return (
     <Box textAlign="center" sx={{ p: 4 }}>
@@ -86,9 +104,9 @@ export default function ImageColorComparison({
       </Typography>
       <Box sx={{ m: 2 }} />
       <ImageColorGrid
-        colorA="red"
-        colorB="yellow"
-        colorC="blue"
+        colorA={colorA}
+        colorB={colorB}
+        colorC={colorC}
         imageLocation={imageLocation}
         handleChooseColor={handleChooseColor}
       />
