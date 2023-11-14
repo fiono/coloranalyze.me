@@ -76,7 +76,7 @@ export default function ImageColorComparison({
   imageLocation: string;
   metaSeason: MetaSeason;
 }) {
-  const [colorChoices, setColorChoices] = React.useState<string[]>("");
+  const [colorChoices, setColorChoices] = React.useState<string[]>([]);
   const [colorCategoryList] = React.useState<ColorCategory[]>(rainbow);
   const [colorCategory, setColorCategory] = React.useState<ColorCategory>(
     ColorCategory.Reds
